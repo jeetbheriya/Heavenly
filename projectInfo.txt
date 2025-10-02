@@ -1,0 +1,64 @@
+### PHASE 1 part a (Database, Routes) ###
+
+1. Requiring all the dependencies.
+2. Connecting to database.
+3. Initializing the sample data to the database.
+4. Index Route : Home page 
+    listing to the " /listing " for all the Villas/Houses/Hotels 
+5. To show our all data to the homepage 
+    - for it 'index.ejs' is required
+    - made an ancor tag which will redirect to the given villa/houses/hotel by their id 
+6. Show the particular data of any Villas/Houses/Hotels in " /listing/:id "
+    - to show prices in indian standard " &#8377; " ->  Ruppess symbol.
+    - " toLocalString( give locality ) " -> Converts any number to a String format with commac ' , ' seperating it.
+    - give locality --> ("en-IN") or any other country.
+7. New & Create Route
+    - Instead of using " let { title, description, price, location, country } = req.body; " 
+    We can write it like this or we can just make int the form of object in ejs file 
+8. Edit & Update Route
+    - Edit option is present in every villa/House/hotel and taking details " { ...req.body.listing } " and redirecting it.
+
+
+### PHASE 1 part b (Adding Styling) ###
+  
+Install " ejs-mate " by " npm i ejs-mate "...It basically helps to create templates or layout 
+
+1. Made a boilerplate.ejs which is implemented to all other ejs file where the permanent things like nav bar, footer present anything is implemented.
+2. BY using " <% layout("/layouts/boilerplate") %> " instead of befor ethe body part to implement in all ejs file.
+3. Before includes the file which is in include...direct the directory inside the views directory.
+4. To use other directory ejs file we have to use includes("../______"),
+5. !important --> to overpower the custom styling of the bootstrap in css
+6. Create Navabr and Footer
+
+-->Styling new listing
+1.Using form control from bootstrap
+
+### PHASE 1 part c ###
+--> Client-Side Validation(form)
+--> Succes and Failure text
+--> Error handling Middleware
+-->Custom WrapAsync(nothing but a better way of writing a try-catch block) for handling errors in async functions.
+
+==>utils directory
+-->We will store extra file such as error file, WrapAsync file etc.
+/* WrapAsync is a function which take a any function as an argument and return a function which calls the given function
+   and catch the error if any.*/
+
+-->Custom ExpressError class
+   - It extends the Error class and takes a message and status code as an argument.
+   - We can use it to throw custom errors.
+
+--> joi is an npm package which is used to validate the data.
+    - We will create a schema for the listing and validate the data against the schema.
+    - If the data is not valid, we will throw an error. 
+    Basically joi errors ko identify krke hum custom error throw kr skte hai.
+
+==> validation for Schema(Middleware)
+
+==> Review section
+1. created a Review Schema, Model.
+2. Setting Up the review form
+
+==> Routes helps to segregate all the same type pf paths
+
+==> Cookies U& Signed cookies

@@ -1,0 +1,154 @@
+body{
+    font-family: "plus Jakarta Sans", sans-serif !important;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container{
+    flex: 1;
+}
+
+.navbar{
+    height: 5rem;
+    background-color: white;
+}
+
+.fa-compass{
+    color: #ff385c;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.nav-link{
+    color: #222 !important;
+}
+
+.f-info-links a{
+    color: #222 !important;
+    text-decoration: none !important;
+}
+
+.f-info-links a:hover{
+    text-decoration: underline !important;
+}
+
+.f-info-links, 
+.f-info-socials,
+.f-info-brand{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.f-info-socials i{
+    margin-right: 0 0.5rem;
+    font-size: 1.2rem;
+}
+
+.f-info{
+    background-color: rgb(239, 237, 237);
+    height: 6rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: space-evenly;
+    text-align: center;
+}
+
+.listing-card{
+    border: none !important;
+    margin-bottom: 2rem;
+}
+
+.card-img-top{
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover !important;
+    height: 20rem;
+}
+
+.card-body{
+    padding: 0 !important;
+}
+
+/* Card Effect */
+.card-img-overlay{
+    opacity: 0;
+}
+
+.card-img-overlay:hover{
+    color: white;
+    opacity: 1;
+}
+
+.add-btn{
+    background-color: #ff385c !important;
+    border: none !important;
+}
+
+.edit-image {
+    width: 20rem; /* Adjust this value as needed, e.g., 20rem, 300px, 50% */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 0.5rem; /* Optional: adds a slight rounded corner */
+    margin-bottom: 1rem; /* Optional: adds some space below the image */
+}
+
+.edit-btn,
+.dlt-btn{
+    background-color: #222;
+    border: none;
+    height: 2rem;
+    border-radius: 0.4rem;
+}
+
+.edit-btn a,
+.dlt-btn{
+    text-decoration: none;
+    color: white;
+}
+
+/* Show Page */
+.show-card{
+    width: 100% !important;
+    max-width: 800px; /* Limit the maximum width of the card itself */
+    margin-left: auto; /* Center the card horizontally */
+    margin-right: auto; /* Center the card horizontally */
+    border: none !important;
+}
+
+.show-image{
+    height: 300px ;
+    object-fit: cover ;
+    width: 100% ;
+    border-radius: 1rem;
+}
+
+.showCard-text ul {
+    font-size: 1rem;
+    line-height: 2;
+}
+
+.showCard-text li {
+    padding-bottom: 5px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.showCard-text li:last-child {
+    border-bottom: none;
+}
+
+.btns{
+    display: flex;
+    gap: 1rem; /* Add some space between the buttons */
+    margin-top: 1rem; /* Add some top margin for spacing */
+}
+
+/*  Map  */
+#map {
+    height: 400px;
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}

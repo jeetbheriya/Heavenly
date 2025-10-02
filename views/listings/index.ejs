@@ -1,0 +1,267 @@
+<% layout("/layouts/boilerplate") %>
+    <style>
+        .price {
+            display: flex;
+            align-items: baseline; /* Aligns the text nicely */
+        }
+
+        #filters{
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+        }
+        
+        /* This hides the scrollbar for a cleaner look */
+        #filters::-webkit-scrollbar {
+            display: none;
+        }
+
+        .filters{
+            text-align: center;
+            margin: 2rem 2rem 0 0;
+            opacity: 0.7;
+            flex-shrink: 0; /* Prevents icons from shrinking */
+        }
+        
+        .filters:hover{
+            opacity: 1;
+            cursor: pointer;
+        }
+        
+        .filters i {
+            font-size: 1.2rem;
+        }
+
+        .filters p {
+            font-size: 0.8rem;
+            margin-top: 0.2rem;
+        }
+
+        .filter-bar {
+            display: flex;
+            align-items: center;
+            position: relative; /* Changed for arrow positioning */
+        }
+
+        .tax-toggle {
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 10px;
+            margin-left: 2rem; /* Adds space between filters and toggle */
+            display: flex;
+            align-items: center;
+            white-space: nowrap; /* Prevents the label from wrapping */
+            flex-shrink: 0; /* Prevents the toggle from shrinking */
+        }
+
+        .filters.active {
+            opacity: 1;
+            border-bottom: 2px solid black;
+        }
+
+        .tax-info {
+            display: none;
+        }
+
+        /* --- CSS FOR SCROLL ARROWS START --- */
+        .scroll-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .scroll-arrow:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .left-arrow {
+            left: -15px; /* Adjust as needed */
+        }
+
+        .right-arrow {
+            right: 0;
+            /* We will adjust this dynamically if needed, but flexbox helps */
+        }
+        
+        .hidden {
+            display: none;
+        }
+        /* --- CSS FOR SCROLL ARROWS END --- */
+
+    </style>
+    
+    <div class="filter-bar">
+        <div class="scroll-arrow left-arrow hidden">
+             <i class="fa-solid fa-chevron-left"></i>
+        </div>
+
+        <div id="filters">
+            <div class="filters">
+                <div> <i class="fa-solid fa-fire"></i> </div>
+                <p> Trending </p>
+            </div>
+            <div class="filters">
+                <div> <i class="fa-solid fa-bed"></i> </div>
+                <p> Rooms </p>
+            </div>
+            <div class="filters">
+                <i class="fa-solid fa-water-ladder"></i>
+                <p>Amazing Pools</p>
+            </div>
+            <div class="filters">
+                <i class="fa-solid fa-tents"></i>
+                <p>Campsites</p>
+            </div>
+            <div class="filters">
+                <i class="fa-solid fa-snowflake"></i>
+                <p>Arctic</p>
+            </div>
+            <div class="filters">
+                <i class="fa-solid fa-umbrella-beach"></i>
+                <p>Beachfront</p>
+            </div>
+            <div class="filters">
+                <i class="fa-solid fa-fort-awesome"></i>
+                <p>Castles</p>
+            </div>
+            <div class="filters">
+                <i class="fa-solid fa-house-chimney"></i>
+                <p>Tiny Homes</p>
+            </div>
+            <div class="filters">
+                <div> <i class="fa-solid fa-landmark-dome"></i> </div>
+                <p>Domes</p>
+            </div>
+            <div class="filters">
+                <div> <i class="fa-solid fa-person-skiing"></i> </div>
+                <p>Ski-in/Ski-out</p>
+            </div>
+            <div class="filters">
+                <div> <i class="fa-solid fa-monument"></i> </div>
+                <p>Wonders</p>
+            </div>
+            <div class="filters">
+                <div> <i class="fa-solid fa-sailboat"></i> </div>
+                <p>Boats</p>
+            </div>
+            <div class="filters">
+                <div> <i class="fa-solid fa-solar-panel"></i> </div>
+                <p>Off-Grid</p>
+            </div>
+            <div class="filters">
+                <div> <i class="fa-solid fa-golf-ball-tee"></i> </div>
+                <p>Golfing</p>
+            </div>
+        </div> 
+        
+        <div class="scroll-arrow right-arrow">
+            <i class="fa-solid fa-chevron-right"></i>
+        </div>
+        
+        <div class="tax-toggle">
+            <div class="form-check-reverse form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+                <label class="form-check-label" for="switchCheckDefault">Display total after taxes</label>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 mt-3">
+        <% for(let listing of allListings) { %>
+            <div class="card col listing-card">
+                <a href="/listing/<%= listing._id %>" style="text-decoration: none; color: black;">
+                    <img src=" <%= listing.image.url %>" class="card-img-top" alt="image-here" style="height: 20rem">
+                    <div class="card-img-overlay">
+                        <i class="fa-solid fa-location-dot"></i>&nbsp;&nbsp;<%= listing.country %>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title"><b><%= listing.title %></b></h5>
+                        <div class="price">
+                            <p class="card-text">&#8377;<%= listing.price.toLocaleString('en-IN') %>/night</p>
+                            <i class="tax-info">&nbsp; +18% GST</i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        <% } %> 
+    </div>
+    <br>     
+
+<script>
+    // --- Tax Toggle Logic ---
+    let taxSwitch = document.getElementById("switchCheckDefault");
+    taxSwitch.addEventListener("click", () => {
+        let taxInfoElements = document.getElementsByClassName("tax-info");
+        for (let info of taxInfoElements) {
+            if (taxSwitch.checked) {
+                info.style.display = "inline";
+            } else {
+                info.style.display = "none";
+            }
+        }
+    });
+
+    // --- Filter Scroll Arrow Logic ---
+    const filtersContainer = document.getElementById('filters');
+    const leftArrow = document.querySelector('.left-arrow');
+    const rightArrow = document.querySelector('.right-arrow');
+    const taxToggle = document.querySelector('.tax-toggle');
+
+    const manageArrows = () => {
+        // Hide left arrow if at the beginning
+        if (filtersContainer.scrollLeft <= 0) {
+            leftArrow.classList.add('hidden');
+        } else {
+            leftArrow.classList.remove('hidden');
+        }
+
+        // Hide right arrow if at the end
+        const isAtEnd = filtersContainer.scrollWidth - filtersContainer.scrollLeft - filtersContainer.clientWidth < 1;
+        if (isAtEnd) {
+            rightArrow.classList.add('hidden');
+        } else {
+            rightArrow.classList.remove('hidden');
+        }
+    };
+    
+    // Reposition right arrow to not overlap the tax toggle
+    const positionRightArrow = () => {
+      const taxToggleWidth = taxToggle.offsetWidth;
+      const containerPadding = 16; // A little space
+      rightArrow.style.right = `${taxToggleWidth + containerPadding}px`;
+    }
+
+    rightArrow.addEventListener('click', () => {
+        filtersContainer.scrollBy({ left: 350, behavior: 'smooth' });
+    });
+
+    leftArrow.addEventListener('click', () => {
+        filtersContainer.scrollBy({ left: -350, behavior: 'smooth' });
+    });
+
+    filtersContainer.addEventListener('scroll', manageArrows);
+
+    // Initial check when the page and its content (like images) are fully loaded
+    window.addEventListener('load', () => {
+        positionRightArrow();
+        manageArrows();
+    });
+
+    // Also reposition on window resize
+     window.addEventListener('resize', () => {
+        positionRightArrow();
+        manageArrows();
+    });
+
+</script>
