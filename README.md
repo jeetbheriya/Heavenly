@@ -1,4 +1,4 @@
-# 🌟 Heavenly - A Modern Portfolio Template
+# 🌟 Heavenly 
 
 Heavenly is a minimalist and responsive portfolio website template built for developers, designers, and artists to effectively showcase their projects and professional background.
 
